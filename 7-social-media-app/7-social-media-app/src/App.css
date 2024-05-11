@@ -5,6 +5,9 @@
   margin: 0;
   padding: 0;
 }
+body {
+  overflow-y: hidden;
+}
 .app-container {
   display: flex;
 }
@@ -17,4 +20,9 @@
 .reactions {
   width: 21rem;
   margin: 14px 10px;
+}
+.create-post {
+  width: 80%;
+  margin-top: 50px;
+  margin-left: 10%;
 }
