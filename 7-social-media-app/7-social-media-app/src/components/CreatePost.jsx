@@ -2,13 +2,11 @@ import React, { useReducer, useRef, useContext } from "react";
 import { PostListContext } from "../store/post-list-store";
 const CreatePost = () => {
   const { addPost } = useContext(PostListContext);
-  const [] = useReducer();
   const userId = useRef();
   const postTitle = useRef();
   const postBody = useRef();
   const reactions = useRef();
   const tags = useRef();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const tagsArray = tags.current.value.split(" ");

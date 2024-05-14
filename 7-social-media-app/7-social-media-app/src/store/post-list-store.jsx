@@ -2,9 +2,9 @@ import { createContext, useReducer } from "react";
 export const PostListContext = createContext({
   postList: [],
   addPost: () => {},
+  addPosts: () => {},
   deletePost: () => {},
 });
-
 const postListReducer = (currPostList, action) => {
   let newPostList = currPostList;
   console.log(currPostList);
@@ -12,8 +12,10 @@ const postListReducer = (currPostList, action) => {
     newPostList = currPostList.filter(
       (post) => post.id !== action.payload.postId
     );
-  } else {
-    newPostList = [...currPostList, action.payload.newItem];
+  } else if (action.type === "ADD_POST") {
+    newPostList = [action.payload.newItem, ...currPostList];
+  } else if (action.type == "ADD_INITIAL_POSTS") {
+    newPostList = action.payload.posts;
   }
   return newPostList;
 };
@@ -37,8 +39,19 @@ const PostListProvider = ({ children }) => {
       },
     });
   };
+  const addPosts = (posts) => {
+    console.log("Clicked" + "Once");
+    dispatchPostList({
+      type: "ADD_INITIAL_POSTS",
+      payload: {
+        posts,
+      },
+    });
+  };
   return (
-    <PostListContext.Provider value={{ postList, addPost, deletePost }}>
+    <PostListContext.Provider
+      value={{ postList, addPost, deletePost, addPosts }}
+    >
       {children}
     </PostListContext.Provider>
   );

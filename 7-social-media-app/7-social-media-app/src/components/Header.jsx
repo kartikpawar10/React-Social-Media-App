@@ -29,26 +29,10 @@ const Header = () => {
               </li>
               <li>
                 <a href="#" className="nav-link px-2 text-white">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a href="#" className="nav-link px-2 text-white">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="nav-link px-2 text-white">
-                  FAQs
-                </a>
-              </li>
-              <li>
-                <a href="#" className="nav-link px-2 text-white">
-                  About
+                  Communities
                 </a>
               </li>
             </ul>
-
             <form
               className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
               role="search"
