@@ -1,13 +1,13 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 export const PostListContext = createContext({
   postList: [],
   addPost: () => {},
-  addPosts: () => {},
   deletePost: () => {},
+  isFetching: false,
 });
+
 const postListReducer = (currPostList, action) => {
   let newPostList = currPostList;
-  console.log(currPostList);
   if (action.type === "DELETE_POST") {
     newPostList = currPostList.filter(
       (post) => post.id !== action.payload.postId
@@ -20,9 +20,23 @@ const postListReducer = (currPostList, action) => {
   return newPostList;
 };
 const PostListProvider = ({ children }) => {
+  const [isFetching, setFetching] = useState(false);
+  useEffect(() => {
+    setFetching(true);
+    fetch("https://dummyjson.com/posts")
+      .then((res) => res.json())
+      .then((data) => {
+        addPosts(data.posts);
+        setFetching(false);
+      });
+
+    return () => {
+      console.log("UseEffect Got Killed");
+    };
+  }, []);
   const [postList, dispatchPostList] = useReducer(postListReducer, []);
   const addPost = (newItem) => {
-    console.log({ newItem });
+    console.log(newItem);
     dispatchPostList({
       type: "ADD_POST",
       payload: {
@@ -31,7 +45,6 @@ const PostListProvider = ({ children }) => {
     });
   };
   const deletePost = (postId) => {
-    console.log("clicked" + postId);
     dispatchPostList({
       type: "DELETE_POST",
       payload: {
@@ -40,7 +53,6 @@ const PostListProvider = ({ children }) => {
     });
   };
   const addPosts = (posts) => {
-    console.log("Clicked" + "Once");
     dispatchPostList({
       type: "ADD_INITIAL_POSTS",
       payload: {
@@ -50,7 +62,7 @@ const PostListProvider = ({ children }) => {
   };
   return (
     <PostListContext.Provider
-      value={{ postList, addPost, deletePost, addPosts }}
+      value={{ postList, addPost, deletePost, isFetching }}
     >
       {children}
     </PostListContext.Provider>

@@ -11,19 +11,36 @@ const CreatePost = () => {
     e.preventDefault();
     const tagsArray = tags.current.value.split(" ");
     const newItem = {
-      id: userId.current.value,
+      userId: userId.current.value,
       title: postTitle.current.value,
       body: postBody.current.value,
       reactions: reactions.current.value,
       tags: tagsArray,
     };
-    userId.current.value = "";
-    postTitle.current.value = "";
-    postBody.current.value = "";
-    reactions.current.value = "";
-    tags.current.value = "";
-    addPost(newItem);
+
+    fetch("https://dummyjson.com/posts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: userId.current.value,
+        title: postTitle.current.value,
+        body: postBody.current.value,
+        reactions: reactions.current.value,
+        tags: tagsArray,
+      }),
+    })
+      .then((res) => res.json())
+      .then((newItem) => {
+        console.log(newItem);
+        addPost(newItem);
+        userId.current.value = "";
+        postTitle.current.value = "";
+        postBody.current.value = "";
+        reactions.current.value = "";
+        tags.current.value = "";
+      });
   };
+
   return (
     <form className="create-post" onSubmit={handleSubmit}>
       <div className="mb-3">

@@ -5,22 +5,13 @@ import Spinner from "./Spinner";
 import { useEffect } from "react";
 import Loading from "./Loading";
 const PostList = () => {
-  const { postList, addPosts } = useContext(PostListContext);
-  const [isfetching, setFetching] = useState(false);
-  useEffect(() => {
-    setFetching(true);
-    fetch("https://dummyjson.com/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        addPosts(data.posts);
-        setFetching(false);
-      });
-  }, []);
+  const { postList, isFetching } = useContext(PostListContext);
+
   return (
     <>
-      {isfetching && <Spinner />}
-      {!isfetching && postList.length === 0 && <Loading />}
-      {!isfetching &&
+      {isFetching && <Spinner />}
+      {!isFetching && postList.length === 0 && <Loading />}
+      {!isFetching &&
         postList.map((post) => <Post key={post.id} post={post} />)}
     </>
   );

@@ -45,8 +45,9 @@ const Sidebar = ({ show, setShow }) => {
           </a>
         </li>
       </ul>
-      <hr />
-      <div className="dropdown">
+
+      <div className="dropdown sticky-bottom">
+        <hr />
         <a
           href="#"
           className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
@@ -54,13 +55,13 @@ const Sidebar = ({ show, setShow }) => {
           aria-expanded="false"
         >
           <img
-            src="https://github.com/mdo.png"
+            src="https://avatars.githubusercontent.com/u/126799229?s=400&u=7113a39edde14386136cf9e26581437ac2628ce1&v=4"
             alt=""
             width="32"
             height="32"
             className="rounded-circle me-2"
           />
-          <strong>mdo</strong>
+          <strong>Kartik</strong>
         </a>
         <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
           <li>
