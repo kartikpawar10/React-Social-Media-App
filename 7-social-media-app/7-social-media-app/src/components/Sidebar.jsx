@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Sidebar = ({ show, setShow }) => {
+const Sidebar = () => {
   return (
     <div
       className="sidebar d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
@@ -18,34 +19,31 @@ const Sidebar = ({ show, setShow }) => {
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <a
-            href="#"
-            className={`nav-link text-white ${show === "Home" && "active"}`}
+          <Link
+            to="/"
+            className={`nav-link text-white`}
             aria-current="page"
-            onClick={() => setShow((s) => "Home")}
+            onClick={() => console.log("Clicked Home")}
           >
             <svg className="bi pe-none me-2" width="16" height="16">
               <use xlinkHref="#home"></use>
             </svg>
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="#"
-            className={`nav-link text-white ${
-              show === "Create Post" && "active"
-            }`}
-            onClick={() => setShow((s) => "Create Post")}
+          <Link
+            to="/create-post"
+            className={`nav-link text-white`}
+            onClick={() => console.log("Clicked Create-post")}
           >
             <svg className="bi pe-none me-2" width="16" height="16">
               <use xlinkHref="#speedometer2"></use>
             </svg>
             CreatePost
-          </a>
+          </Link>
         </li>
       </ul>
-
       <div className="dropdown sticky-bottom">
         <hr />
         <a

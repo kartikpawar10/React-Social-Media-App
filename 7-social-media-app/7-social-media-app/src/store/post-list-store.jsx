@@ -3,7 +3,6 @@ export const PostListContext = createContext({
   postList: [],
   addPost: () => {},
   deletePost: () => {},
-  isFetching: false,
 });
 
 const postListReducer = (currPostList, action) => {
@@ -20,20 +19,6 @@ const postListReducer = (currPostList, action) => {
   return newPostList;
 };
 const PostListProvider = ({ children }) => {
-  const [isFetching, setFetching] = useState(false);
-  useEffect(() => {
-    setFetching(true);
-    fetch("https://dummyjson.com/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        addPosts(data.posts);
-        setFetching(false);
-      });
-
-    return () => {
-      console.log("UseEffect Got Killed");
-    };
-  }, []);
   const [postList, dispatchPostList] = useReducer(postListReducer, []);
   const addPost = (newItem) => {
     console.log(newItem);
@@ -61,9 +46,7 @@ const PostListProvider = ({ children }) => {
     });
   };
   return (
-    <PostListContext.Provider
-      value={{ postList, addPost, deletePost, isFetching }}
-    >
+    <PostListContext.Provider value={{ postList, addPost, deletePost }}>
       {children}
     </PostListContext.Provider>
   );
