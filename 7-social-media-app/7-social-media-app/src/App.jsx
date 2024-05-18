@@ -7,16 +7,16 @@ import CreatePost from "./components/CreatePost";
 import PostListProvider from "./store/post-list-store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { Outlet } from "react-router-dom";
 
-function App() {
-  const [show, setShow] = useState("Home");
+function App({ children }) {
   return (
     <PostListProvider>
       <div className="app-container">
-        <Sidebar show={show} setShow={setShow} />
+        <Sidebar />
         <div className="content">
           <Header />
-          {show === "Home" ? <PostList /> : <CreatePost />}
+          <Outlet />
           <Footer />
         </div>
       </div>
